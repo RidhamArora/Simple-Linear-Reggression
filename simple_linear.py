@@ -29,3 +29,10 @@ regressor.fit(X_train , y_train)
 
 #Predecting the test values
 y_pred = regressor.predict(X_test)
+
+#Plotting the results
+plt.scatter(X_train, y_train, color = 'red')
+plt.scatter(X_test, y_test, color = 'green')
+plt.plot(X_train, regressor.predict(X_train) , color = 'blue')
+plt.title('Regression')
+plt.show()
