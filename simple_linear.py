@@ -21,3 +21,8 @@ X_train = sc_X.fit_transform(X_train)
 X_test = sc_X.transform(X_test)
 sc_y = StandardScaler()
 y_train = sc_y.fit_transform(y_train)"""
+
+#Fitting the data
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(X_train , y_train)
