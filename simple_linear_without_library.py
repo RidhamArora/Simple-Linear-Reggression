@@ -13,3 +13,8 @@ from sklearn.cross_validation import train_test_split
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 1/3, random_state = 0)
 
 plt.scatter(X_train,Y_train)
+#Normalizing the data
+x_train=(X_train-X_train.mean())/X_train.std()
+y_train=Y_train
+plt.scatter(x_train,y_train)
+plt.show()
