@@ -10,11 +10,11 @@ Y = dataset.iloc[:,-1:].values
 
 # Splitting the dataset into the Training set and Test set
 from sklearn.cross_validation import train_test_split
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 1/3, random_state = 0)
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size = 1/3, random_state = 1)
 
 x_train=(X_train-X_train.mean())/X_train.std()
 x_test = (X_test-X_test.mean())/X_test.std()
-y_train=(X_train-X_train.mean())/X_train.std()
+y_train=(Y_train-Y_train.mean())/Y_train.std()
 y_test=(Y_test-Y_test.mean())/Y_test.std()
 plt.scatter(X_train,Y_train)
 plt.show()
@@ -52,9 +52,9 @@ def gradientDescent(x_train,y_train,learning_rate=0.001):
     theta=np.ones((2,))
     error_list=[]
     itr = 0
-    max_itr=1000
+    max_itr=10000
     e=1000
-    while(e>0.01):
+    while(itr<max_itr):
         grad=gradient(x_train,y_train,theta)
         e=error(x_train,y_train,theta)
         error_list.append(e)
@@ -67,9 +67,14 @@ def gradientDescent(x_train,y_train,learning_rate=0.001):
 final_theta,error_list=gradientDescent(x_train,y_train)
 plt.plot(error_list)
 plt.show()
+plt.scatter(x_train,y_train,color='Blue')
+plt.scatter(x_test,y_test,color='Green')
+y_pred=hypothesis(x_test,final_theta)
+plt.plot(x_test,y_pred,color='Orange')
+plt.show()
 plt.scatter(X_train,Y_train,color='Blue')
 plt.scatter(X_test,Y_test,color='Green')
 y_pred=hypothesis(x_test,final_theta)
-Y_pred=y_pred*Y_test.std()+Y_test.mean()
+Y_pred=y_pred*Y_train.std()+Y_train.mean()
 plt.plot(X_test,Y_pred,color='Orange')
 plt.show()
