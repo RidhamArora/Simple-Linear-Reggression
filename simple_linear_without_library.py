@@ -44,15 +44,15 @@ def gradient(x_train,y_train,theta):
     
     for i in range(m):
         hx=hypothesis(x_train[i],theta)
-        grad[0] = hx-y_train[i]
-        grad[1] = (hx-y_train[i])*x_train[i]
+        grad[0] += hx-y_train[i]
+        grad[1] += (hx-y_train[i])*x_train[i]
     return grad
     
 ###Algorithm
 def gradientDescent(x_train,y_train,learning_rate=0.001):
     theta=np.ones((2,))
-    theta[0]=1
-    theta[1]=1
+    theta[0]=-2
+    theta[1]=0
     error_list=[]
     itr = 0
     max_itr=1000
@@ -64,7 +64,7 @@ def gradientDescent(x_train,y_train,learning_rate=0.001):
         error_list.append(e)
         theta_list.append((theta[0],theta[1]))
         theta[0]=theta[0]-grad[0]*learning_rate
-        theta[1]==theta[1]-grad[1]*learning_rate
+        theta[1]=theta[1]-grad[1]*learning_rate
         itr+=1
     print(itr)    
     return theta,error_list,theta_list
