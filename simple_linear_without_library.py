@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 from mpl_toolkits.mplot3d import Axes3D
+from sklearn.linear_model import LinearRegression
 # Importing the dataset
 dataset = pd.read_csv('Salary_Data.csv')
 X = dataset.iloc[:,:-1].values
@@ -48,9 +49,9 @@ def gradient(x_train,y_train,theta):
     return grad
     
 ###Algorithm
-def gradientDescent(x_train,y_train,learning_rate=0.1):
+def gradientDescent(x_train,y_train,learning_rate=0.001):
     theta=np.ones((2,))
-    theta[0]=-2
+    theta[0]=1
     theta[1]=1
     error_list=[]
     itr = 0
@@ -83,7 +84,6 @@ Y_pred=y_pred*Y_train.std()+Y_train.mean()
 plt.plot(X_test,Y_pred,color='Orange')
 plt.show()
 
-
 #Visualizing Cost function in 3d
 T0=np.arange(-2,3,0.01)
 T1=np.arange(-2,3,0.01)
@@ -115,7 +115,10 @@ axes.contour(T0,T1,J,cmap='rainbow',alpha=0.5)
 axes.scatter(theta_list[:,0],theta_list[:,1],error_list,color='red',marker='^')
 plt.show()
 
-
+u=((Y_test-Y_pred)**2).sum()
+v= ((Y_test - Y_test.mean()) ** 2).sum()
+r=(1-(u/v))
+print(r)
 
 
 

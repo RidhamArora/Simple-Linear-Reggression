@@ -30,6 +30,11 @@ regressor.fit(X_train , y_train)
 #Predecting the test values
 y_pred = regressor.predict(X_test)
 
+u=((y_test-y_pred)**2).sum()
+v= ((y_test - y_test.mean()) ** 2).sum()
+r=(1-(u/v))
+print(r)
+print(regressor.score(X_test,y_test))
 #Plotting the results
 plt.scatter(X_train, y_train, color = 'red')
 plt.scatter(X_test, y_test, color = 'green')
